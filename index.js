@@ -17,7 +17,7 @@ var api = new ParseServer({
   appId: process.env.APP_ID || 'cirpack.tma.vn.pushNotificationTest',
   push: {
     ios:{
-      pdx:"public/cirkey_tma.p12",
+      pdx:"public/cirkey_tma_.p12",
       bundleId: "cirpack.tma.vn.pushNotificationTest",
       production : false
     }
