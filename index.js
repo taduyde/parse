@@ -14,11 +14,11 @@ if (!databaseUri) {
 var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'S64Q3RXYM7.cirpack.tma.vn.pushNotificationTest',
+  appId: process.env.APP_ID || 'cirpack.tma.vn.pushNotificationTest',
   push: {
     ios:{
       pdx:"public/cirkey_tma.p12",
-      bundleId: "S64Q3RXYM7.cirpack.tma.vn.pushNotificationTest",
+      bundleId: "cirpack.tma.vn.pushNotificationTest",
       production : false
     }
   },
