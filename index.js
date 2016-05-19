@@ -16,6 +16,10 @@ var api = new ParseServer({
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'cirpack.tma.vn.pushNotificationTest',
   push: {
+    android: {
+        senderId: '1042768746539',
+        apiKey: 'AIzaSyDUquU_73aR151bHQSH8M61bUfDtIiLzfA'
+    },
     ios:{
       pfx:"public/cirkey_tma.p12",
       bundleId: "cirpack.tma.vn.pushNotificationTest",
