@@ -21,8 +21,8 @@ var api = new ParseServer({
         apiKey: 'AIzaSyDUquU_73aR151bHQSH8M61bUfDtIiLzfA'
     },
     ios:{
-      pfx:"public/cirkey_tma.p12",
-      bundleId: "cirpack.tma.vn.pushNotificationTest",
+      pfx:"/opt/parse-server/public/cirpack_push.p12",
+      bundleId: "tma.cirpack.uniquity",
       production : false
     }
   },
