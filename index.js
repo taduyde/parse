@@ -60,7 +60,7 @@ var uq_smart = new ParseServer({
 
 var app = express();
 app.use('/parse', uq_qa1);
-app.use('/parse', uq_smart);
+app.use('/parse1', uq_smart);
 
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
