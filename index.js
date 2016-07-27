@@ -11,7 +11,7 @@ if (!databaseUri) {
   console.log('DATABASE_URI not specified, falling back to localhost.');
 }
 
-var uq_qa1 = new ParseServer({
+var api = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
   appId: process.env.APP_ID || 'cirpack.tma.vn.pushNotificationTest',
@@ -32,43 +32,18 @@ var uq_qa1 = new ParseServer({
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
 });
-
-var uq_smart = new ParseServer({
-  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
-  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'cirpack.tma.vn.pushNotificationTest',
-  push: {
-    android: {
-        senderId: '1042768746539',
-        apiKey: 'AIzaSyDUquU_73aR151bHQSH8M61bUfDtIiLzfA'
-    },
-    ios:{
-      pfx:"public/PushNotification_smart.p12",
-      bundleId: "tma.cirpack.smartuq",
-      production : false
-    }
-  },
-  masterKey: process.env.MASTER_KEY || 'master', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'https://pacific-brushlands-55337.herokuapp.com/uq_smart',  // Don't forget to change to https if needed
-  liveQuery: {
-    classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
-  }
-});
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
 // javascriptKey, restAPIKey, dotNetKey, clientKey
 
 var app = express();
-app.use('/parse', uq_qa1);
-app.use('/uq_smart', uq_smart);
 
 // Serve static assets from the /public folder
 app.use('/public', express.static(path.join(__dirname, '/public')));
 
-// // Serve the Parse API on the /parse URL prefix
-// var mountPath = process.env.PARSE_MOUNT || '/parse';
-// app.use(mountPath, api1);
-// app.use(mountPath, api2);
+// Serve the Parse API on the /parse URL prefix
+var mountPath = process.env.PARSE_MOUNT || '/parse';
+app.use(mountPath, api);
 
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', function(req, res) {
