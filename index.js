@@ -57,6 +57,32 @@ var uq_smart = new ParseServer({
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
 });
+
+// build production 
+
+var cirpack_production = new ParseServer({
+  databaseURI: databaseUri || 'mongodb://localhost:27017/cirpack_pro',
+  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
+  appId: process.env.APP_ID || 'cirpackpro-parse',
+  verbose: true,
+  push: {
+    android: {
+        senderId: '422866127995',
+        apiKey: 'AIzaSyDUddRXbj0pR83WGXfJAv2U7t_ZjytfJ0A'
+    },
+    ios:{
+      pfx:"public/cirpack_push_production.p12",
+      bundleId: "com.cirpack.uniquity",
+      production : true
+    }
+  },
+  masterKey: process.env.MASTER_KEY || 'master', //Add your master key here. Keep it secret!
+  serverURL: process.env.SERVER_URL || 'https://pacific-brushlands-55337.herokuapp.com/cirpack',  // Don't forget to change to https if needed
+  liveQuery: {
+    classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+  }
+});
+
 // Client-keys like the javascript key or the .NET key are not necessary with parse-server
 // If you wish you require them, you can set them as options in the initialization above:
 // javascriptKey, restAPIKey, dotNetKey, clientKey
@@ -74,6 +100,7 @@ var mountPath = process.env.PARSE_MOUNT || '/parse';
 
 app.use("/parse", uq_qa1);
 app.use("/smart", uq_smart);
+app.use("/cirpack", cirpack_production);
 
 
 // Parse Server plays nicely with the rest of your web routes
