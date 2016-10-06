@@ -25,7 +25,7 @@ var uq_qa1 = new ParseServer({
       //override on TMA key
       //pfx:"public/cirpack_key.p12",
       //bundleId: "tma.cirpack.uniquity",
-      pfx:"cirpack_push_dev.p12",
+      pfx:"cirpack_push_dev.cer",
       bundleId: "com.cirpack.uniquity",
       production : false
     }
