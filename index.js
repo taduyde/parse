@@ -22,8 +22,11 @@ var uq_qa1 = new ParseServer({
         apiKey: 'AIzaSyDUquU_73aR151bHQSH8M61bUfDtIiLzfA'
     },
     ios:{
-      pfx:"public/cirpack_key.p12",
-      bundleId: "tma.cirpack.uniquity",
+      //override on TMA key
+      //pfx:"public/cirpack_key.p12",
+      //bundleId: "tma.cirpack.uniquity",
+      pfx:"cirpack_push_dev.p12",
+      bundleId: "com.cirpack.uniquity",
       production : false
     }
   },
