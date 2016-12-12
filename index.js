@@ -63,6 +63,32 @@ var uq_voip = new ParseServer({
   }
 });
 
+var uq_cirpack_voip = new ParseServer({
+  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+  cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
+  appId: process.env.APP_ID || 'com.cirpack.uniquity',
+  verbose: true,
+  push: {
+    android: {
+        senderId: '1042768746539',
+        apiKey: 'AIzaSyDUquU_73aR151bHQSH8M61bUfDtIiLzfA'
+    },
+    ios:{
+      //override on Cirpack dev
+      pfx:"public/cirpack-voip-certificate.p12",
+      bundleId: "com.cirpack.uniquity",
+      //pfx:"public/tma-voip-push.pem",
+      //bundleId: "com.cirpack.uniquity",
+      production : false
+    }
+  },
+  masterKey: process.env.MASTER_KEY || 'master', //Add your master key here. Keep it secret!
+  serverURL: process.env.SERVER_URL || 'https://pacific-brushlands-55337.herokuapp.com/cpvoip',  // Don't forget to change to https if needed
+  liveQuery: {
+    classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
+  }
+});
+
 var uq_smart = new ParseServer({
   databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
@@ -129,6 +155,7 @@ var mountPath = process.env.PARSE_MOUNT || '/parse';
 app.use("/parse", uq_qa1);
 app.use("/smart", uq_smart);
 app.use("/voip", uq_voip);
+app.use("/cpvoip", uq_cirpack_voip);
 app.use("/cirpack", cirpack_production);
 
 
